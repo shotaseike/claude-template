@@ -2,25 +2,19 @@
 # Usage: iex (iwr 'https://raw.githubusercontent.com/shotaseike/claude-template/main/bootstrap.ps1').Content
 # Run this from the root of your new project.
 
-$ErrorActionPreference = 'Stop'
-
-$repo = "https://github.com/shotaseike/claude-template.git"
-$tmp = Join-Path $env:TEMP "claude-template-$(Get-Random)"
-
-try {
-    Write-Host "テンプレートを取得中..."
-    # core.autocrlf=false でクローンして CRLF 問題を回避
-    git clone --depth 1 --quiet --config core.autocrlf=false $repo $tmp
-
-    $bash = Get-Command bash -ErrorAction SilentlyContinue
-    if (-not $bash) {
-        Write-Error "bash が見つかりません。Git for Windows をインストールするか、WSL2 を有効にしてください。"
-        exit 1
-    }
-
-    # バックスラッシュをスラッシュに変換（Git Bash 対応）
-    $setupSh = "$tmp\setup.sh" -replace '\\', '/'
-    bash "$setupSh"
-} finally {
-    Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue
+$bash = Get-Command bash -ErrorAction SilentlyContinue
+if (-not $bash) {
+    Write-Error "bash が見つかりません。Git for Windows または WSL2 をインストールしてください。"
+    exit 1
 }
+
+# Windows パス問題を回避するため、クローンも含めすべて bash 側で処理する
+# @'...'@ は PowerShell のリテラル here-string（変数展開なし）→ bash がそのまま受け取る
+bash -c @'
+set -euo pipefail
+TMP=$(mktemp -d)
+trap "rm -rf $TMP" EXIT
+echo "テンプレートを取得中..."
+git clone --depth 1 --quiet https://github.com/shotaseike/claude-template.git "$TMP/template"
+bash "$TMP/template/setup.sh"
+'@
