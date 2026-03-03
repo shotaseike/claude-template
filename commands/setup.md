@@ -5,22 +5,22 @@ Runs entirely within Claude Code — no curl, no shell installer needed.
 
 **This command is intended as a global command: `~/.claude/commands/setup.md`**
 
-Prerequisite: `git clone https://github.com/shotaseike/claude-template ~/.claude/claude-template`
+Prerequisite: `git clone https://github.com/shotaseike/claude-template ~/.claude`
 
 ## Steps
 
 ### Step 1: Copy .claude/ from local template
 
-Check that `~/.claude/claude-template/` exists. If not, tell the user to run:
+Check that `~/.claude/commands/init-project.md` exists. If not, tell the user to run:
 ```
-git clone https://github.com/shotaseike/claude-template ~/.claude/claude-template
+git clone https://github.com/shotaseike/claude-template ~/.claude
 ```
 and stop.
 
 Otherwise, run:
 
 ```bash
-SRC="${HOME}/.claude/claude-template"
+SRC="${HOME}/.claude"
 mkdir -p .claude/commands .claude/hooks .claude/skills/cursor-migration
 
 cp "$SRC/settings.json"                        .claude/settings.json
@@ -71,7 +71,7 @@ Ask the user in Japanese: GCP（BigQuery / Cloud Run）MCP を設定しますか
 
 If yes:
 ```bash
-cp "${HOME}/.claude/claude-template/.mcp.json.example" .mcp.json
+cp "${HOME}/.claude/.mcp.json.example" .mcp.json
 ```
 Inform the user to replace `YOUR_GCP_PROJECT_ID` and `YOUR_SERVICE_NAME` in `.mcp.json`.
 
