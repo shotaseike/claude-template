@@ -92,9 +92,11 @@ echo "  1. GitHub Labels を作成（planning/github.md 内のコマンド参照
 if [[ -f "$TARGET_DIR/.mcp.json" ]]; then
   echo "  2. .mcp.json の YOUR_GCP_PROJECT_ID / YOUR_SERVICE_NAME を編集"
 fi
-echo "  3. CLAUDE.md を作成: claude /init"
+echo "  3. Claude Code を起動して /init-project を実行（言語/フレームワーク自動検出 → 追加コンポーネント取得）"
+echo "  4. CLAUDE.md を完成させる（/init-project が雛形を生成）"
 echo ""
 echo "使えるコマンド:"
+echo "  /init-project     -- プロジェクト分析 → everything-claude-code から rules/skills/agents を取得"
 echo "  /push             -- レビュー -> コミット -> プッシュ -> PR 作成"
 echo "  /create-task      -- planning/open_items.md -> GitHub Issue 作成"
 echo "  /assign           -- Issue 割当 + タスクブランチ作成"
