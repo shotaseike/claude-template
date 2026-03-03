@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "bigquery": {
+      "command": "npx",
+      "args": ["-y", "@toolbox-sdk/server", "--prebuilt", "bigquery", "--stdio"],
+      "env": {
+        "BIGQUERY_PROJECT": "YOUR_GCP_PROJECT_ID",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/home/vscode/.config/gcloud/application_default_credentials.json"
+      }
+    },
+    "cloud-run": {
+      "command": "npx",
+      "args": ["-y", "@google-cloud/cloud-run-mcp"],
+      "env": {
+        "GOOGLE_CLOUD_PROJECT": "YOUR_GCP_PROJECT_ID",
+        "GOOGLE_CLOUD_REGION": "us-central1",
+        "DEFAULT_SERVICE_NAME": "YOUR_SERVICE_NAME",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/home/vscode/.config/gcloud/application_default_credentials.json"
+      }
+    }
+  }
+}
