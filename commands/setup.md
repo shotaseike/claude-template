@@ -1,30 +1,38 @@
-Bootstrap Claude Code configuration for a new project from shotaseike/claude-template.
+Bootstrap Claude Code configuration for a new project.
 
-Downloads .claude/ structure from GitHub and sets up planning files.
-Runs entirely within Claude Code — no shell installer needed.
+Copies .claude/ from the local template clone into the current project.
+Runs entirely within Claude Code — no curl, no shell installer needed.
 
 **This command is intended as a global command: `~/.claude/commands/setup.md`**
 
+Prerequisite: `git clone https://github.com/shotaseike/claude-template ~/.claude/claude-template`
+
 ## Steps
 
-### Step 1: Download .claude/ template files
+### Step 1: Copy .claude/ from local template
 
-Run the following Bash commands to download the template:
+Check that `~/.claude/claude-template/` exists. If not, tell the user to run:
+```
+git clone https://github.com/shotaseike/claude-template ~/.claude/claude-template
+```
+and stop.
+
+Otherwise, run:
 
 ```bash
-BASE="https://raw.githubusercontent.com/shotaseike/claude-template/main"
+SRC="${HOME}/.claude/claude-template"
 mkdir -p .claude/commands .claude/hooks .claude/skills/cursor-migration
 
-curl -fsSL "$BASE/.claude/settings.json"                         -o .claude/settings.json
-curl -fsSL "$BASE/.claude/commands/setup.md"                     -o .claude/commands/setup.md
-curl -fsSL "$BASE/.claude/commands/assign.md"                    -o .claude/commands/assign.md
-curl -fsSL "$BASE/.claude/commands/create-task.md"               -o .claude/commands/create-task.md
-curl -fsSL "$BASE/.claude/commands/init-project.md"              -o .claude/commands/init-project.md
-curl -fsSL "$BASE/.claude/commands/push.md"                      -o .claude/commands/push.md
-curl -fsSL "$BASE/.claude/commands/task-status.md"               -o .claude/commands/task-status.md
-curl -fsSL "$BASE/.claude/hooks/auto-register-issues.py"         -o .claude/hooks/auto-register-issues.py
-curl -fsSL "$BASE/.claude/hooks/doc-impact.sh"                   -o .claude/hooks/doc-impact.sh
-curl -fsSL "$BASE/.claude/skills/cursor-migration/SKILL.md"      -o .claude/skills/cursor-migration/SKILL.md
+cp "$SRC/settings.json"                        .claude/settings.json
+cp "$SRC/commands/setup.md"                    .claude/commands/setup.md
+cp "$SRC/commands/assign.md"                   .claude/commands/assign.md
+cp "$SRC/commands/create-task.md"              .claude/commands/create-task.md
+cp "$SRC/commands/init-project.md"             .claude/commands/init-project.md
+cp "$SRC/commands/push.md"                     .claude/commands/push.md
+cp "$SRC/commands/task-status.md"              .claude/commands/task-status.md
+cp "$SRC/hooks/auto-register-issues.py"        .claude/hooks/auto-register-issues.py
+cp "$SRC/hooks/doc-impact.sh"                  .claude/hooks/doc-impact.sh
+cp "$SRC/skills/cursor-migration/SKILL.md"     .claude/skills/cursor-migration/SKILL.md
 chmod +x .claude/hooks/doc-impact.sh .claude/hooks/auto-register-issues.py
 ```
 
@@ -63,7 +71,7 @@ Ask the user in Japanese: GCP（BigQuery / Cloud Run）MCP を設定しますか
 
 If yes:
 ```bash
-curl -fsSL "$BASE/.mcp.json.example" -o .mcp.json
+cp "${HOME}/.claude/claude-template/.mcp.json.example" .mcp.json
 ```
 Inform the user to replace `YOUR_GCP_PROJECT_ID` and `YOUR_SERVICE_NAME` in `.mcp.json`.
 
