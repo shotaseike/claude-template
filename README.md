@@ -12,7 +12,16 @@ Claude Code プロジェクト設定のテンプレート集。
 以下のコマンドをプロジェクトのルートディレクトリで実行してください。
 ワンライナーで `.claude` 環境の構築、`.gitignore` の設定が完了します。
 
-**前提条件:** `git`, `gh`, `python3`, `curl` がインストール済みであり、`gh auth login` でGitHubにログインしている必要があります。
+**前提条件:**
+- `git`, `gh`, `python3`, `curl` がインストール済み
+- `gh auth login` で GitHub にログイン済み
+- プロジェクトが Git リポジトリの状態（`git init` 済み）
+
+**新規プロジェクトの場合の初期化:**
+```bash
+git init
+git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+```
 
 #### Linux / macOS / WSL
 ```bash
