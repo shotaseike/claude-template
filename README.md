@@ -14,8 +14,22 @@ Claude Code プロジェクト設定のテンプレート集。
 
 **前提条件:** `git`, `gh`, `python3`, `curl` がインストール済みであり、`gh auth login` でGitHubにログインしている必要があります。
 
+#### Linux / macOS / WSL
 ```bash
 curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/main/install.sh | bash
+```
+
+#### Windows PowerShell
+Windows PowerShell では `curl` が `Invoke-WebRequest` にエイリアスされるため、WSL または git bash で実行してください。
+
+**WSL で実行:**
+```bash
+wsl bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/main/install.sh | bash"
+```
+
+**git bash で実行:**
+```bash
+bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/main/install.sh | bash"
 ```
 
 ### 2. プロジェクトの初期化
