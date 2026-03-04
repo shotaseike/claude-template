@@ -49,6 +49,7 @@ curl -sSL "$BASE_URL/commands/create-task.md" -o "$CLAUDE_DIR/commands/create-ta
 curl -sSL "$BASE_URL/commands/init-project.md" -o "$CLAUDE_DIR/commands/init-project.md"
 curl -sSL "$BASE_URL/commands/push.md" -o "$CLAUDE_DIR/commands/push.md"
 curl -sSL "$BASE_URL/commands/task-status.md" -o "$CLAUDE_DIR/commands/task-status.md"
+curl -sSL "$BASE_URL/commands/update-claude-config.md" -o "$CLAUDE_DIR/commands/update-claude-config.md"
 
 # hooks (and give execute permission)
 curl -sSL "$BASE_URL/hooks/auto-register-issues.py" -o "$CLAUDE_DIR/hooks/auto-register-issues.py"
