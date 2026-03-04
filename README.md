@@ -1,184 +1,76 @@
 # claude-template
 
-Claude Code プロジェクト設定のテンプレート集。新規プロジェクトに `.claude/` をコピーして使う。
+Claude Code プロジェクト設定のテンプレート集。
+このテンプレートを利用することで、プロジェクトに最適化されたClaude Codeの環境を簡単に構築できます。
 
-`/init-project` コマンドにより、プロジェクトの言語・フレームワークを自動検出し、[everything-claude-code](https://github.com/affaan-m/everything-claude-code) から適切な rules / skills / agents を選んでダウンロードする。
-
-## リポジトリ構造
-
-このリポジトリ自体が `.claude/` の内容。`git clone` するだけで使える。
-
-```
-claude-template/       ← git clone 先 = ~/.claude/
-├── settings.json               # フック設定
-├── commands/
-│   ├── setup.md                # /setup: 新規PJにテンプレートをコピー（グローバル推奨）
-│   ├── init-project.md         # /init-project: 言語検出 → ecc から rules/skills/agents 取得
-│   ├── push.md                 # /push: レビュー→コミット→プッシュ→PR作成
-│   ├── create-task.md          # /create-task <ITEM-ID>: open_items.md → GitHub Issue
-│   ├── assign.md               # /assign <ITEM-ID> <person>: Issue割当＋タスクブランチ作成
-│   └── task-status.md          # /task-status <ITEM-ID> <status>: Issue ステータス更新
-├── skills/
-│   └── cursor-migration/
-│       └── SKILL.md            # /cursor-migration: Cursor → Claude Code 移行手順
-└── hooks/
-    ├── doc-impact.sh           # PostToolUse: Python編集時にdoc-tracerで影響ドキュメントを表示
-    └── auto-register-issues.py # PostToolUse: open_items.md 保存時にGitHub Issueを自動登録
-
-.mcp.json.example               # MCPサーバー設定テンプレート（コピーして .mcp.json に）
-```
-
-`/init-project` 実行後に追加される（プロジェクトごとに異なる）:
-```
-.claude/
-├── rules/
-│   ├── common/   # 共通ルール（常にダウンロード）
-│   └── python/   # 言語別ルール（例）
-├── agents/       # サブエージェント定義
-│   ├── architect.md
-│   ├── code-reviewer.md
-│   └── ...
-└── skills/
-    ├── python-patterns/
-    ├── api-design/
-    └── ...
-```
+`/init-project` コマンドにより、プロジェクトの言語・フレームワークを自動検出し、[everything-claude-code](https://github.com/affaan-m/everything-claude-code) から適切な rules / skills / agents を選んでダウンロードします。
 
 ## セットアップ手順
 
-### 0. テンプレートをクローン（初回のみ）
+### 1. 初期セットアップ
 
-```
-git clone https://github.com/shotaseike/claude-template ~/.claude
-```
+以下のコマンドをプロジェクトのルートディレクトリで実行してください。
+ワンライナーで `.claude` 環境の構築、`.gitignore` の設定が完了します。
 
-Windows / Mac / Linux 共通。更新時:
-
-```
-git -C ~/.claude pull
-```
-
-> **注意**: `~/.claude` が既に存在する場合は空にするか、`git init && git remote add origin ...` で初期化してください。
-
-### 1. 新規プロジェクトで /setup を実行
-
-クローン後は `~/.claude/commands/setup.md` が自動的に配置されるため、すぐに使えます。
-
-Claude Code を起動して:
-
-```
-/setup
-```
-
-Claude が自動で以下をすべて実行する:
-1. `.claude/` の全テンプレートファイルを GitHub からダウンロード
-2. GitHub ユーザー名 / Projects 番号を質問 → `planning/github.md` を生成
-3. GCP MCP を使うか確認 → `.mcp.json` を生成（任意）
-4. プロジェクトの言語・フレームワークを自動検出
-5. [everything-claude-code](https://github.com/affaan-m/everything-claude-code) から適切な rules / skills / agents をダウンロード
-6. `CLAUDE.md` の雛形を生成
-
-ダウンロードされる例（Python + FastAPI の場合）:
-- `rules/common/`, `rules/python/`
-- `skills/python-patterns/`, `skills/api-design/`, `skills/tdd-workflow/`, `skills/deployment-patterns/`
-- `agents/architect.md`, `agents/planner.md`, `agents/python-reviewer.md`
-
-### 3. .mcp.json をカスタマイズ（GCPプロジェクトを使う場合）
-
-`.mcp.json` の `YOUR_GCP_PROJECT_ID` と `YOUR_SERVICE_NAME` を実際の値に変更。
-
-### 4. GitHub Labels を作成
-
-`auto-register-issues.py` と `create-task.md` が使う Labels:
+**前提条件:** `git`, `gh`, `python3`, `curl` がインストール済みであり、`gh auth login` でGitHubにログインしている必要があります。
 
 ```bash
-gh label create "code-fix"   --color "d73a4a" --repo OWNER/REPO
-gh label create "doc-update" --color "e4e669" --repo OWNER/REPO
-gh label create "monitor"    --color "0075ca" --repo OWNER/REPO
+curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/main/install.sh | bash
 ```
+
+### 2. プロジェクトの初期化
+
+セットアップが完了したら、Claude Code を起動し、以下のコマンドを実行してください。
+プロジェクトの言語・フレームワークを自動検出し、最適な rules / skills / agents をダウンロードします。
+
+```
+/init-project
+```
+
+これで、あなたのプロジェクト用の Claude Code 環境の準備は完了です。
+
+## 設定のアップデート
+
+テンプレートや `everything-claude-code` の内容は随時更新されます。
+以下のコマンドを実行することで、設定を最新の状態に保つことができます。
+
+```
+/update-claude-config
+```
+
+このコマンドは、プロジェクトの言語・フレームワークを再検出し、最新の rules / skills / agents を再ダウンロードして上書きします。
+
+## リポジトリ構造
+
+`install.sh` によって、カレントプロジェクトに以下の構造で `.claude` ディレクトリが作成されます。
+
+```
+.claude/
+├── settings.json               # フック設定
+├── commands/
+│   ├── init-project.md         # /init-project: プロジェクトの初期化
+│   ├── update-claude-config.md # /update-claude-config: 設定の更新
+│   ├── push.md                 # /push: GitHubへのプッシュとPR作成
+│   ├── create-task.md          # /create-task: GitHub Issueの作成
+│   ├── assign.md               # /assign: Issueの担当者割り当て
+│   └── task-status.md          # /task-status: Issueのステータス更新
+├── skills/
+│   └── cursor-migration/
+│       └── SKILL.md            # /cursor-migration: Cursorからの移行支援
+└── hooks/
+    ├── doc-impact.sh           # Python編集時の影響ドキュメント表示
+    └── auto-register-issues.py # open_items.md からのGitHub Issue自動登録
+```
+
+`/init-project` または `/update-claude-config` を実行すると、`rules/`, `agents/`, `skills/` の下にプロジェクトに合わせたコンポーネントが追加されます。
 
 ## コンポーネント詳細
 
-### /init-project コマンド
+### コマンド (`/init-project`, `/push`, etc.)
+- `/init-project`: プロジェクトの言語を検出し、最適な設定をダウンロードします。
+- `/update-claude-config`: 設定を最新版に更新します。
+- GitHub連携コマンド (`/push`, `/create-task`など): GitHub Issues と Projects を利用したタスク管理ワークフローを支援します。リポジトリは自動で検出されるため、設定不要ですぐに利用できます。
 
-プロジェクトの言語・フレームワーク・DBを自動検出し、[everything-claude-code](https://github.com/affaan-m/everything-claude-code) から最適なコンポーネントをダウンロードする。
-
-| 検出対象 | 参照ファイル |
-|----------|-------------|
-| TypeScript/JS | `package.json` |
-| Python | `requirements.txt` / `pyproject.toml` |
-| Go | `go.mod` |
-| Rust | `Cargo.toml` |
-| Java/Kotlin | `pom.xml` / `build.gradle` |
-
-言語別マッピング（一部）:
-
-| 言語/FW | Rules | Skills | Agents |
-|---------|-------|--------|--------|
-| Python + Django | `python/` | `django-patterns/`, `django-security/`, `django-tdd/` | `python-reviewer` |
-| Python + FastAPI | `python/` | `api-design/`, `backend-patterns/`, `python-patterns/` | `python-reviewer` |
-| TypeScript + React | `typescript/` | `frontend-patterns/`, `e2e-testing/` | — |
-| Go | `golang/` | `golang-patterns/`, `golang-testing/` | `go-reviewer`, `go-build-resolver` |
-| Spring Boot | — | `springboot-patterns/`, `springboot-security/`, `springboot-tdd/` | — |
-
-常にインストール: `rules/common/`, `tdd-workflow/`, `deployment-patterns/`, `security-review/`, `architect`, `planner`, `code-reviewer`, `security-reviewer`, `doc-updater`
-
-### コマンド (`/push`, `/create-task`, `/assign`, `/task-status`)
-
-GitHub Issues + Projects を使ったタスク管理ワークフロー。
-**リポジトリは `gh repo view` で自動検出**、プロジェクト番号は `planning/github.md` から読み込む。
-プロジェクト固有の設定を一切ハードコードしていないので、そのまま使える。
-
-タスクブランチ命名規則: `task/<ITEM-ID>-<person>`（例: `task/DOC-1-seike`）
-
-### フック
-
-#### doc-impact.sh
-Python ファイル編集時に `doc-tracer impact` を実行し、影響するドキュメントを表示。
-`doc-tracer` がインストールされ `tracer.db` が存在する場合のみ動作（未インストールなら無害にスキップ）。
-
-```bash
-pip install doc-tracer
-doc-tracer scan .   # プロジェクトルートで実行してtracer.dbを生成
-```
-
-#### auto-register-issues.py
-`planning/open_items.md` を Write するたびに実行。未登録の `[ITEM-ID]` エントリを GitHub Issue として自動作成し、Project に追加。
-- リポジトリ: `gh repo view` で自動検出
-- プロジェクト番号: `planning/github.md` から読み込み
-
-### cursor-migration スキル
-Cursor AI IDE から Claude Code への移行手順を自動実行するスキル。
-`.cursor/mcp.json` → `.mcp.json`、`.cursorrules` → `CLAUDE.md` などの変換を行う。
-
-## open_items.md フォーマット
-
-`auto-register-issues.py` と `/create-task` が期待するフォーマット:
-
-```markdown
-## 🔴 要対処（コード・設定変更が必要）
-
-### [CODE-1] タイトル
-
-説明と対処方法...
-
----
-
-## 🟡 要更新（ドキュメント整備が必要）
-
-### [DOC-1] タイトル
-
-...
-
----
-
-## ✅ 解決済み
-
-### [OLD-1] ...
-```
-
-セクション絵文字 → GitHub Label のマッピング:
-- 🔴 → `code-fix`
-- 🟡 → `doc-update`
-- 🔵 → `monitor`
-- ✅ → 登録対象外（解決済み）
+### フック (`hooks/`)
+- `doc-impact.sh`: Pythonファイル編集時に、関連するドキュメントを自動で検索・表示します。
+- `auto-register-issues.py`: `planning/open_items.md` ファイルにタスクを記述するだけで、自動でGitHub Issueを作成します。

@@ -1,0 +1,1 @@
+This command updates the current project's Claude Code configuration. It re-detects the project's language and framework, then downloads the latest rules, skills, and agents from the `everything-claude-code` repository to overwrite the existing configuration.
