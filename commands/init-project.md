@@ -169,6 +169,8 @@ If `CLAUDE.md` does not exist, create it with this template (fill in detected va
 
 Installed from [everything-claude-code](https://github.com/affaan-m/everything-claude-code):
 
+**各コンポーネントの詳細は [COMPONENTS.md](../COMPONENTS.md) を参照してください。**
+
 ### Rules
 - `.claude/rules/common/` — Universal coding standards
 [list installed language rules]
@@ -178,6 +180,8 @@ Installed from [everything-claude-code](https://github.com/affaan-m/everything-c
 
 ### Agents
 [list installed agents]
+
+詳細な説明・使い方は [COMPONENTS.md](../COMPONENTS.md) を参照。
 
 ## Communication Style
 

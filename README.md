@@ -89,6 +89,8 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 
 ## コンポーネント詳細
 
+> ダウンロードされる **Rules / Skills / Agents** の詳細な説明と使い方は [COMPONENTS.md](COMPONENTS.md) をご覧ください。
+
 ### コマンド (`/init-project`, `/push`, etc.)
 - `/init-project`: プロジェクトの言語を検出し、最適な設定をダウンロードします。
 - `/update-claude-config`: 設定を最新版に更新します。
