@@ -73,6 +73,7 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 ├── commands/
 │   ├── init-project.md         # /init-project: プロジェクトの初期化
 │   ├── update-claude-config.md # /update-claude-config: 設定の更新
+│   ├── docs.md                 # /docs: ドキュメントの保守・更新
 │   ├── push.md                 # /push: GitHubへのプッシュとPR作成
 │   ├── create-task.md          # /create-task: GitHub Issueの作成
 │   ├── assign.md               # /assign: Issueの担当者割り当て
@@ -91,10 +92,17 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 
 > ダウンロードされる **Rules / Skills / Agents** の詳細な説明と使い方は [COMPONENTS.md](COMPONENTS.md) をご覧ください。
 
-### コマンド (`/init-project`, `/push`, etc.)
-- `/init-project`: プロジェクトの言語を検出し、最適な設定をダウンロードします。
-- `/update-claude-config`: 設定を最新版に更新します。
-- GitHub連携コマンド (`/push`, `/create-task`など): GitHub Issues と Projects を利用したタスク管理ワークフローを支援します。リポジトリは自動で検出されるため、設定不要ですぐに利用できます。
+### コマンド
+
+| コマンド | 説明 |
+|---------|------|
+| `/init-project` | プロジェクトの言語・フレームワークを自動検出し、最適な rules/skills/agents をダウンロード |
+| `/update-claude-config` | 既存の設定を最新版に更新（CLAUDE.md は保持） |
+| `/docs` | CLAUDE.md などのドキュメントをチェック・更新 |
+| `/push` | 変更をレビュー・コミット・プッシュ。タスクブランチの場合は PR 作成・Issue 自動クローズ |
+| `/create-task` | `planning/open_items.md` から GitHub Issue を作成 |
+| `/assign` | Issue を割り当てし、タスクブランチを作成 |
+| `/task-status` | Issue のステータスを GitHub Projects で更新 |
 
 ### フック (`hooks/`)
 - `doc-impact.sh`: Pythonファイル編集時に、関連するドキュメントを自動で検索・表示します。

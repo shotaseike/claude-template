@@ -46,6 +46,7 @@ curl -sSL "$BASE_URL/settings.json" -o "$CLAUDE_DIR/settings.json"
 # commands
 curl -sSL "$BASE_URL/commands/assign.md" -o "$CLAUDE_DIR/commands/assign.md"
 curl -sSL "$BASE_URL/commands/create-task.md" -o "$CLAUDE_DIR/commands/create-task.md"
+curl -sSL "$BASE_URL/commands/docs.md" -o "$CLAUDE_DIR/commands/docs.md"
 curl -sSL "$BASE_URL/commands/init-project.md" -o "$CLAUDE_DIR/commands/init-project.md"
 curl -sSL "$BASE_URL/commands/push.md" -o "$CLAUDE_DIR/commands/push.md"
 curl -sSL "$BASE_URL/commands/task-status.md" -o "$CLAUDE_DIR/commands/task-status.md"
