@@ -73,12 +73,13 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 ├── commands/
 │   ├── init-project.md         # /init-project: プロジェクトの初期化
 │   ├── update-claude-config.md # /update-claude-config: 設定の更新
-│   ├── docs.md                 # /docs: ドキュメントの保守・更新
 │   ├── push.md                 # /push: GitHubへのプッシュとPR作成
 │   ├── create-task.md          # /create-task: GitHub Issueの作成
 │   ├── assign.md               # /assign: Issueの担当者割り当て
 │   └── task-status.md          # /task-status: Issueのステータス更新
 ├── skills/
+│   ├── docs/
+│   │   └── SKILL.md            # /docs: ドキュメントの保守・更新（doc-tracer統合）
 │   └── cursor-migration/
 │       └── SKILL.md            # /cursor-migration: Cursorからの移行支援
 └── hooks/
@@ -98,7 +99,7 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 |---------|------|
 | `/init-project` | プロジェクトの言語・フレームワークを自動検出し、最適な rules/skills/agents をダウンロード |
 | `/update-claude-config` | 既存の設定を最新版に更新（CLAUDE.md は保持） |
-| `/docs` | CLAUDE.md などのドキュメントをチェック・更新 |
+| `/docs` | ドキュメントをチェック・更新。frontmatter による影響範囲分析、孤立ドキュメントへの自動frontmatter付与 |
 | `/push` | 変更をレビュー・コミット・プッシュ。タスクブランチの場合は PR 作成・Issue 自動クローズ |
 | `/create-task` | `planning/open_items.md` から GitHub Issue を作成 |
 | `/assign` | Issue を割り当てし、タスクブランチを作成 |
