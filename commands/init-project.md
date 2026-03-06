@@ -26,11 +26,14 @@ Based on the detected profile, build a component plan. Use the following mapping
 
 ### Always included
 
-**Rules (`rules/common/`)** — all files:
-`coding-style.md`, `git-workflow.md`, `testing.md`, `security.md`, `performance.md`, `patterns.md`, `hooks.md`, `agents.md`
+**Rules (`rules/common/`)** — download only these specific files (do NOT download all files in the directory):
+`coding-style.md`, `git-workflow.md`, `testing.md`, `security.md`, `performance.md`, `patterns.md`, `hooks.md`, `agents.md`, `development-workflow.md`
+
+> NOTE: Skip any file not in the above list (e.g. `test.md` is a known duplicate of `coding-style.md` and must be excluded).
 
 **Agents** — always:
-`planner.md`, `architect.md`, `code-reviewer.md`, `security-reviewer.md`, `doc-updater.md`
+`planner.md`, `architect.md`, `code-reviewer.md`, `security-reviewer.md`, `doc-updater.md`,
+`tdd-guide.md`, `refactor-cleaner.md`, `build-error-resolver.md`
 
 **Skills** — always:
 `tdd-workflow/`, `deployment-patterns/`, `security-review/`

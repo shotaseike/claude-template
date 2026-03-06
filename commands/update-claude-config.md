@@ -53,12 +53,13 @@ Based on the detected profile, build a component plan. Use the following mapping
 ### Always included
 
 **Rules (`rules/common/`)** — download only these specific files (do NOT download all files in the directory):
-`coding-style.md`, `git-workflow.md`, `testing.md`, `security.md`, `performance.md`, `patterns.md`, `hooks.md`, `agents.md`
+`coding-style.md`, `git-workflow.md`, `testing.md`, `security.md`, `performance.md`, `patterns.md`, `hooks.md`, `agents.md`, `development-workflow.md`
 
 > NOTE: Skip any file not in the above list (e.g. `test.md` is a known duplicate of `coding-style.md` and must be excluded).
 
 **Agents** — always:
-`planner.md`, `architect.md`, `code-reviewer.md`, `security-reviewer.md`, `doc-updater.md`
+`planner.md`, `architect.md`, `code-reviewer.md`, `security-reviewer.md`, `doc-updater.md`,
+`tdd-guide.md`, `refactor-cleaner.md`, `build-error-resolver.md`
 
 **Skills** — always:
 `tdd-workflow/`, `deployment-patterns/`, `security-review/`
@@ -114,6 +115,30 @@ Ask the user:
 ## Step 5: Download Components
 
 Use the same download patterns as `init-project.md` Step 4.
+
+---
+
+## Step 5b: Cleanup — Remove Components Not in Plan
+
+After downloading, scan existing `.claude/` directories and remove any files NOT in the current component plan:
+
+### Agents cleanup
+List all `.md` files in `.claude/agents/`. Remove any file whose basename is NOT in the agents list for the detected profile.
+
+### Skills cleanup
+List all directories in `.claude/skills/`. Remove any directory whose name is NOT in the skills list for the detected profile.
+
+> NOTE: Do NOT remove files from `.claude/rules/` that were added manually (i.e., not downloaded from ECC). Only remove rules files that exist in ECC's `rules/` directories but are not in the whitelist.
+
+Show a summary before deleting:
+```
+クリーンアップ対象:
+  agents/go-reviewer.md (Go 言語用、現プロジェクト非対象)
+  skills/e2e-testing/ (react/nextjs 用、現プロジェクト非対象)
+削除してよいですか？ (y/n)
+```
+
+Ask for confirmation before deleting.
 
 ---
 
