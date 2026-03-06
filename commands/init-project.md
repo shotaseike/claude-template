@@ -71,9 +71,10 @@ Add `database-reviewer.md` to agents if any database is detected.
 List all components that will be downloaded:
 ```
 Rules:   rules/common/ (8 files), rules/python/ (N files)
-Skills:  python-patterns/, python-testing/, api-design/, tdd-workflow/, deployment-patterns/, security-review/
+Skills:  python-patterns/, python-testing/, tdd-workflow/, deployment-patterns/, security-review/
 Agents:  planner.md, architect.md, code-reviewer.md, security-reviewer.md, doc-updater.md, python-reviewer.md
 ```
+(fastapi / flask の場合は `api-design/`, `backend-patterns/` も追加されます)
 
 Ask the user:
 > 上記のコンポーネントをダウンロードしてよいですか？スキップまたは追加があれば教えてください。
@@ -209,7 +210,7 @@ Show a summary in Japanese:
 
 インストールされたコンポーネント:
   ルール: rules/common/ (N ファイル), rules/python/ (M ファイル)
-  スキル: python-patterns/, python-testing/, api-design/, tdd-workflow/, deployment-patterns/, security-review/
+  スキル: python-patterns/, python-testing/, tdd-workflow/, deployment-patterns/, security-review/
   エージェント: planner, architect, code-reviewer, security-reviewer, doc-updater, python-reviewer
 
 次のステップ:
