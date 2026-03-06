@@ -54,14 +54,29 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 
 ## 設定のアップデート
 
-テンプレートや `everything-claude-code` の内容は随時更新されます。
-以下のコマンドを実行することで、設定を最新の状態に保つことができます。
+以下の2つのソースは随時更新されます：
+
+1. **このテンプレートリポジトリ** (`shotaseike/claude-template`)
+   - コマンド定義、スキル、フック、設定テンプレート
+
+2. **everything-claude-code** (`affaan-m/everything-claude-code`)
+   - プロジェクト言語・フレームワーク固有のルール、スキル、エージェント
+
+以下のコマンドを実行することで、両方のソースから最新の設定を取得できます。
 
 ```
 /update-claude-config
 ```
 
-このコマンドは、プロジェクトの言語・フレームワークを再検出し、最新の rules / skills / agents を再ダウンロードして上書きします。
+### 実行内容
+
+このコマンドは以下の順序で更新を行います：
+
+1. **プロジェクト分析** - 言語・フレームワークを再検出
+2. **テンプレート更新** - このリポジトリの最新コマンド、スキル、フック、設定をダウンロード
+3. **プロジェクト固有コンポーネント更新** - `everything-claude-code` から最新の rules / skills / agents をダウンロード
+
+> **重要:** `CLAUDE.md` とプロジェクト固有の設定は保持されます。
 
 ## リポジトリ構造
 
