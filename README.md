@@ -65,7 +65,37 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 
 ## リポジトリ構造
 
-`install.sh` によって、カレントプロジェクトに以下の構造で `.claude` ディレクトリが作成されます。
+### テンプレートリポジトリの構成
+
+このリポジトリは以下のファイルで構成されています：
+
+```
+.
+├── install.sh                      # インストールスクリプト
+├── settings.json                   # デフォルト設定テンプレート
+├── .mcp.json.example               # MCP設定の例
+├── README.md                       # このファイル
+├── COMPONENTS.md                   # コンポーネント詳細
+├── commands/                       # コマンド定義テンプレート
+│   ├── init-project.md
+│   ├── update-claude-config.md
+│   ├── push.md
+│   ├── create-task.md
+│   ├── assign.md
+│   └── task-status.md
+├── hooks/                          # フックスクリプト
+│   ├── doc-impact.sh
+│   └── auto-register-issues.py
+└── skills/                         # スキルテンプレート
+    ├── docs/
+    │   └── SKILL.md
+    └── cursor-migration/
+        └── SKILL.md
+```
+
+### インストール後のプロジェクト構造
+
+`install.sh` によって、新規プロジェクトのカレントディレクトリに以下の構造で `.claude` ディレクトリが作成されます：
 
 ```
 .claude/
@@ -87,7 +117,7 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
     └── auto-register-issues.py # open_items.md からのGitHub Issue自動登録
 ```
 
-`/init-project` または `/update-claude-config` を実行すると、`rules/`, `agents/`, `skills/` の下にプロジェクトに合わせたコンポーネントが追加されます。
+`/init-project` または `/update-claude-config` を実行すると、`.claude/` ディレクトリの下の `rules/`, `agents/`, `skills/` にプロジェクトに合わせたコンポーネントが追加されます。
 
 ## コンポーネント詳細
 
