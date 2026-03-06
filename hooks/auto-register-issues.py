@@ -44,24 +44,6 @@ def detect_repo() -> str:
     return ""
 
 
-def read_github_config() -> tuple[str, str]:
-    """Read PROJECT_NUMBER and PROJECT_OWNER from planning/github.md.
-
-    Returns (project_number, project_owner). Falls back to empty strings.
-    Looks for lines like:
-      - Project number: 2
-      - Owner: shotaseike
-    """
-    github_md = "planning/github.md"
-    if not os.path.isfile(github_md):
-        return "", ""
-    with open(github_md, encoding="utf-8") as f:
-        content = f.read()
-    number_match = re.search(r"[Pp]roject[^\d]*(\d+)", content)
-    owner_match = re.search(r"[Oo]wner[:\s]+([A-Za-z0-9_-]+)", content)
-    project_number = number_match.group(1) if number_match else ""
-    project_owner = owner_match.group(1) if owner_match else ""
-    return project_number, project_owner
 
 
 def parse_resolved_ids(content: str) -> set:
@@ -143,21 +125,6 @@ def create_issue(item_id: str, title: str, label: str, body_block: str, repo: st
     return result.stdout.strip()
 
 
-def add_to_project(issue_url: str, project_number: str, project_owner: str) -> None:
-    """Add an Issue to GitHub Project (non-fatal if it fails)."""
-    if not project_number or not project_owner:
-        return
-    result = subprocess.run(
-        [
-            "gh", "project", "item-add", project_number,
-            "--owner", project_owner,
-            "--url", issue_url,
-        ],
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
-        print(f"[auto-register] WARNING: Failed to add {issue_url} to project: {result.stderr.strip()}", file=sys.stderr)
 
 
 def main() -> None:
@@ -173,8 +140,6 @@ def main() -> None:
         print("[auto-register] WARNING: Could not detect GitHub repo. Skipping.", file=sys.stderr)
         return
 
-    project_number, project_owner = read_github_config()
-
     with open(file_path, encoding="utf-8") as f:
         content = f.read()
 
@@ -188,7 +153,6 @@ def main() -> None:
             continue
         url = create_issue(item_id, title, label, body_block, repo)
         if url:
-            add_to_project(url, project_number, project_owner)
             new_issues.append((item_id, url))
 
     if new_issues:

@@ -50,6 +50,12 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 /init-project
 ```
 
+このコマンドは以下を自動で実行します：
+- **プロジェクト分析** - 言語・フレームワークを検出
+- **コンポーネントダウンロード** - `everything-claude-code` から最適な rules/skills/agents をダウンロード
+- **planning/ ディレクトリ作成** - タスク管理用の planning ディレクトリを作成
+- **CLAUDE.md 生成** - プロジェクト設定テンプレートを作成
+
 これで、あなたのプロジェクト用の Claude Code 環境の準備は完了です。
 
 ## 設定のアップデート
@@ -152,4 +158,4 @@ bash -c "curl -sSL https://raw.githubusercontent.com/shotaseike/claude-template/
 
 ### フック (`hooks/`)
 - `doc-impact.sh`: Pythonファイル編集時に、関連するドキュメントを自動で検索・表示します。
-- `auto-register-issues.py`: `planning/open_items.md` ファイルにタスクを記述するだけで、自動でGitHub Issueを作成します。
+- `auto-register-issues.py`: `planning/open_items.md` にタスクを記述すると、自動で GitHub Issue を作成します（ラベル付き）。

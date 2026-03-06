@@ -140,7 +140,17 @@ Execute all downloads in sequence. Report each file as it is downloaded.
 
 ---
 
-## Step 5: Generate CLAUDE.md (if not present)
+## Step 5: Setup Planning Directory
+
+Create the `planning/` directory for task management:
+
+```bash
+mkdir -p planning
+```
+
+---
+
+## Step 6: Generate CLAUDE.md (if not present)
 
 If `CLAUDE.md` does not exist, create it with this template (fill in detected values):
 
@@ -190,7 +200,7 @@ Always respond to the user in **Japanese**.
 
 ---
 
-## Step 6: Report
+## Step 7: Report
 
 Show a summary in Japanese:
 
